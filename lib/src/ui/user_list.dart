@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc_pattern_example/components/list_loading_frame.dart';
 import 'package:flutter_bloc_pattern_example/src/blocs/user_bloc.dart';
 import 'package:flutter_bloc_pattern_example/src/models/user_model.dart';
 
@@ -18,18 +19,29 @@ class _UserListState extends State<UserList> {
       appBar: AppBar(
         title: const Text('User'),
       ),
-      body: StreamBuilder(
-        stream: bloc.user,
-        builder: (context, AsyncSnapshot<UserModel> snapshot) {
-          if (snapshot.hasData) {
-            return _buildUser(snapshot.data!);
-          } else if (snapshot.hasError) {
-            return Text(snapshot.error.toString());
-          }
-
-          return const Center(child: CircularProgressIndicator());
-        },
+      body: Center(
+        child: ListView.separated(
+          itemBuilder: (context, index) {
+            return const ListLoadingFrame();
+          },
+          separatorBuilder: (context, index) {
+            return const Divider();
+          },
+          itemCount: 30,
+        ),
       ),
+      // body: StreamBuilder(
+      //   stream: bloc.user,
+      //   builder: (context, AsyncSnapshot<UserModel> snapshot) {
+      //     if (snapshot.hasData) {
+      //       return _buildUser(snapshot.data!);
+      //     } else if (snapshot.hasError) {
+      //       return Text(snapshot.error.toString());
+      //     }
+      //
+      //     return const Center(child: CircularProgressIndicator());
+      //   },
+      // ),
     );
   }
 

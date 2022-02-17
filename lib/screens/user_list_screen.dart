@@ -15,6 +15,8 @@ class _UserListScreenState extends State<UserListScreen> {
 
   List<UserModel> userList = [];
 
+  bool isLoading = true;
+
 
   @override
   void initState() {
