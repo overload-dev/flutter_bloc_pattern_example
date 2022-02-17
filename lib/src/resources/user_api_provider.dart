@@ -17,4 +17,21 @@ class UserApiProvider {
       throw Exception('Failed to load Data');
     }
   }
+
+  Future<List<UserModel>> fetchUserList(int offset, int count) async {
+    final String url =
+        'https://jsonplaceholder.typicode.com/users?offset=$offset/$count';
+
+    final response = await client.get(Uri.parse(url));
+
+    if (response.statusCode == 200) {
+      List<UserModel> list = json.decode(response.body);
+
+      return json
+          .decode(response.body)
+          .map<UserModel>((item) => UserModel.fromJson(item));
+    } else {
+      throw Exception('Failed to load Data');
+    }
+  }
 }
