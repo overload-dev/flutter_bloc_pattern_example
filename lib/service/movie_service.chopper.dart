@@ -22,4 +22,12 @@ class _$MovieService extends MovieService {
     final $request = Request('GET', $url, client.baseUrl);
     return client.send<Popular, Popular>($request);
   }
+
+  @override
+  Future<Response<Lists>> getPageOfMovies(int page) {
+    final $url = 'movie/550/lists';
+    final $params = <String, dynamic>{'page': page};
+    final $request = Request('GET', $url, client.baseUrl, parameters: $params);
+    return client.send<Lists, Lists>($request);
+  }
 }

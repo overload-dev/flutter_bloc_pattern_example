@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:chopper/chopper.dart';
+import 'package:flutter_bloc_pattern_example/models/lists.dart';
 import 'package:flutter_bloc_pattern_example/models/popular.dart';
 
 // API 에서 호출한 문자열을 클래스 인스턴스로 변환하기 위한 변환기
@@ -32,10 +33,20 @@ class ModelConverter implements Converter {
     if (contentType != null && contentType.contains(jsonHeaders)) {
       body = utf8.decode(response.bodyBytes);
     }
+
+    String requestUrl = response.base.request!.url.path;
+
     try {
       var mapData = json.decode(body);
-      var popular = Popular.fromJson(mapData);
-      return response.copyWith<BodyType>(body: popular as BodyType);
+
+      if(requestUrl.contains('/lists')){
+        var lists = Lists.fromJson(mapData);
+        return response.copyWith<BodyType>(body: lists as BodyType);
+      } else { // if(requestUrl.contains('/popular'))
+        var popular = Popular.fromJson(mapData);
+        return response.copyWith<BodyType>(body: popular as BodyType);
+      }
+
     } catch (e) {
       chopperLogger.warning(e);
       return response.copyWith<BodyType>(body: body);
