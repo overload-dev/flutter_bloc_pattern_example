@@ -37,9 +37,7 @@ class App extends StatelessWidget {
       child: MaterialApp(
         title: 'Movie Listings',
         debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
+        theme: ThemeData.dark(),
         home: const MovieListings(),
       ),
     );
