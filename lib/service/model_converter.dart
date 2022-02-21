@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:chopper/chopper.dart';
 import 'package:flutter_bloc_pattern_example/models/lists.dart';
 import 'package:flutter_bloc_pattern_example/models/popular.dart';
+import 'package:flutter_bloc_pattern_example/service/constants.dart';
 
 // API 에서 호출한 문자열을 클래스 인스턴스로 변환하기 위한 변환기
 class ModelConverter implements Converter {
@@ -35,18 +36,20 @@ class ModelConverter implements Converter {
     }
 
     String requestUrl = response.base.request!.url.path;
-
     try {
       var mapData = json.decode(body);
 
-      if(requestUrl.contains('/lists')){
-        var lists = Lists.fromJson(mapData);
-        return response.copyWith<BodyType>(body: lists as BodyType);
-      } else { // if(requestUrl.contains('/popular'))
-        var popular = Popular.fromJson(mapData);
-        return response.copyWith<BodyType>(body: popular as BodyType);
+      //데이터 구조가 다르므로 요청 데이터에 따라 변환 클래스에 분기를 준다.
+      switch (requestUrl) {
+        case REQ_LISTS:
+          var lists = Lists.fromJson(mapData);
+          return response.copyWith<BodyType>(body: lists as BodyType);
+        case REQ_POPULAR:
+          var popular = Popular.fromJson(mapData);
+          return response.copyWith<BodyType>(body: popular as BodyType);
+        default:
+          throw Exception('invalid request');
       }
-
     } catch (e) {
       chopperLogger.warning(e);
       return response.copyWith<BodyType>(body: body);
@@ -57,6 +60,4 @@ class ModelConverter implements Converter {
   Response<BodyType> convertResponse<BodyType, InnerType>(Response response) {
     return decodeJson<BodyType, InnerType>(response);
   }
-
-
 }

@@ -1,6 +1,7 @@
 import 'package:chopper/chopper.dart';
 import 'package:flutter_bloc_pattern_example/models/lists.dart';
 import 'package:flutter_bloc_pattern_example/models/popular.dart';
+import 'package:flutter_bloc_pattern_example/service/constants.dart';
 import 'package:flutter_bloc_pattern_example/service/header_interceptor.dart';
 import 'package:flutter_bloc_pattern_example/service/model_converter.dart';
 
@@ -9,10 +10,10 @@ part 'movie_service.chopper.dart';
 // API 호출 클래스, Chopper 로 Http Client 호출 구성을 자동화한다.
 @ChopperApi()
 abstract class MovieService extends ChopperService {
-  @Get(path: 'movie/popular')
+  @Get(path: REQ_POPULAR)
   Future<Response<Popular>> getPopularMovies();
 
-  @Get(path: 'movie/550/lists')
+  @Get(path: REQ_LISTS)
   Future<Response<Lists>> getPageOfMovies(@Query() int page);
 
   static MovieService create() {
