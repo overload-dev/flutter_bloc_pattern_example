@@ -1,9 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc_pattern_example/service/movie_service.dart';
-import 'package:flutter_bloc_pattern_example/ui/movie_listings.dart';
+import 'package:flutter_bloc_pattern_example/screens/main_screen.dart';
 import 'package:logging/logging.dart';
-import 'package:provider/provider.dart';
 
 void main() {
   _setupLogging();
@@ -30,15 +28,11 @@ class App extends StatelessWidget {
     //
     //   home: LoadingNext(),
     // );
-    return Provider(
-      create: (context) => MovieService.create(),
-      dispose: (_, MovieService service) => service.client.dispose(),
-      child: MaterialApp(
-        title: 'Movie Listings',
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData.dark(),
-        home: const MovieListings(),
-      ),
+    return MaterialApp(
+      title: 'Movie Listings',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData.dark(),
+      home: const MainScreen(),
     );
   }
 }

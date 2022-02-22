@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc_pattern_example/models/list_result.dart';
 import 'package:flutter_bloc_pattern_example/service/movie_service.dart';
 
-class MovieListings extends StatefulWidget {
-  const MovieListings({Key? key}) : super(key: key);
+class StackMovieListScreen extends StatefulWidget {
+  const StackMovieListScreen({Key? key}) : super(key: key);
 
   @override
-  _MovieListingsState createState() => _MovieListingsState();
+  _StackMovieListScreenState createState() => _StackMovieListScreenState();
 }
 
-class _MovieListingsState extends State<MovieListings> {
+class _StackMovieListScreenState extends State<StackMovieListScreen> {
   static const String IMAGE_URL = "https://image.tmdb.org/t/p/w500/";
 
   final MovieService ms = MovieService.create();
@@ -68,51 +68,13 @@ class _MovieListingsState extends State<MovieListings> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Movie API Test - Page: $page'),
-        actions: [
-          ElevatedButton(
-            onPressed: () {
-              setState(() {
-                page++;
-              });
-            },
-            child: const Text('Next'),
-          )
-        ],
+        title: Text('Movie API Test (Stack) - Page: $page'),
       ),
       body: SafeArea(
         child: _buildMovieList(context),
       ),
     );
   }
-
-  // 단일 호출
-  // _buildBody(BuildContext context) {
-  //   return FutureBuilder<Response<Lists>>(
-  //     future: Provider.of<MovieService>(context).getPageOfMovies(page),
-  //     builder: (context, snapshot) {
-  //       if (snapshot.connectionState == ConnectionState.done) {
-  //         if (snapshot.hasError) {
-  //           return Center(
-  //             child: Text(
-  //               snapshot.error.toString(),
-  //               textAlign: TextAlign.center,
-  //               textScaleFactor: 1.3,
-  //             ),
-  //           );
-  //         }
-  //
-  //         final lists = snapshot.data!.body;
-  //
-  //         return _buildMovieList(context, lists!);
-  //       } else {
-  //         return const Center(
-  //           child: CircularProgressIndicator(),
-  //         );
-  //       }
-  //     },
-  //   );
-  // }
 
   ListView _buildMovieList(BuildContext context) {
     return ListView.builder(
