@@ -1,11 +1,6 @@
-import 'dart:math';
-
-import 'package:chopper/chopper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc_pattern_example/models/list_result.dart';
-import 'package:flutter_bloc_pattern_example/models/lists.dart';
 import 'package:flutter_bloc_pattern_example/service/movie_service.dart';
-import 'package:provider/provider.dart';
 
 class MovieListings extends StatefulWidget {
   const MovieListings({Key? key}) : super(key: key);
@@ -29,7 +24,7 @@ class _MovieListingsState extends State<MovieListings> {
 
   @override
   void initState() {
-
+    super.initState();
     //최초 진입 데이터 호출
     _initData();
 
@@ -91,6 +86,7 @@ class _MovieListingsState extends State<MovieListings> {
     );
   }
 
+  // 단일 호출
   // _buildBody(BuildContext context) {
   //   return FutureBuilder<Response<Lists>>(
   //     future: Provider.of<MovieService>(context).getPageOfMovies(page),

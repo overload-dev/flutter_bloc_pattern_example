@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ListLoadingFrame extends StatefulWidget {
@@ -44,10 +43,5 @@ class _ListLoadingFrameState extends State<ListLoadingFrame>
         color: Colors.grey,
       ),
     );
-
-    return Container(
-      color: Colors.grey.withOpacity(_animation.value),
-    );
-
   }
 }

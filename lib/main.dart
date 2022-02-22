@@ -1,7 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc_pattern_example/service/movie_service.dart';
-import 'package:flutter_bloc_pattern_example/ui/loading_next.dart';
 import 'package:flutter_bloc_pattern_example/ui/movie_listings.dart';
 import 'package:logging/logging.dart';
 import 'package:provider/provider.dart';

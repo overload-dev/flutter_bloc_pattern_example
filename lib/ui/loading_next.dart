@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class LoadingNext extends StatefulWidget {
+  const LoadingNext({Key? key}) : super(key: key);
+
   @override
   _LoadingNext createState() => _LoadingNext();
 }
@@ -13,7 +15,7 @@ class _LoadingNext extends State<LoadingNext> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Text("Loading next data"),
+          title: const Text("Loading next data"),
         ),
         body: _createBody(context),
       ),
@@ -24,7 +26,7 @@ class _LoadingNext extends State<LoadingNext> {
     List<int> _data = [for (var i = 0; i < 200; i++) i];
     Future<List<int>> _fetch(int count) {
       return Future.delayed(
-        Duration(seconds: 2),
+        const Duration(seconds: 2),
         () => _data.where((element) => element < count).toList(),
       );
     }
@@ -36,7 +38,7 @@ class _LoadingNext extends State<LoadingNext> {
       builder: (BuildContext context, AsyncSnapshot<List<int>?> snapshot) {
         final data = snapshot.data;
         if (data == null) {
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         }
 
         controller.addListener(() {
