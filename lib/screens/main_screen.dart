@@ -7,6 +7,10 @@ class MainScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    // RegExp nameRegex = RegExp(r'^[\w.@+-]+$');
+    // RegExp emailRegex = RegExp(r'[a-z0-9]+@[a-z]+\.[a-z]{2,3}$');
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Network & Data Work Examples'),

@@ -5,8 +5,8 @@ import 'package:logging/logging.dart';
 
 void main() {
   _setupLogging();
-
   runApp(const App());
+
 }
 
 void _setupLogging() {
